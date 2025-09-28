@@ -4,7 +4,8 @@
 #include "ITestDataManager.h"
 
 // 测试数据管理器实现类
-class TestDataManager : public ITestDataManager {
+class TestDataManager : public ITestDataManager
+{
 private:
     std::map<int, TestDataSet> dataSets_;          // 所有数据集，ID为键
     std::map<std::string, int> dataSetNameMap_;    // 数据集名称到ID的映射

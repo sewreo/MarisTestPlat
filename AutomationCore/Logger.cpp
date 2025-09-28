@@ -248,11 +248,7 @@ LoggerManager::LoggerManager()
     setLogger(std::make_unique<SpdLogger>());
 }
 
-LoggerManager &LoggerManager::getInstance()
-{
-    static LoggerManager instance;
-    return instance;
-}
+
 
 void LoggerManager::setLogger(std::unique_ptr<ILogger> logger)
 {

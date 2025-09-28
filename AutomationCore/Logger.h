@@ -106,12 +106,14 @@ private:
 class LoggerManager
 {
 public:
-    static LoggerManager &getInstance();
+    static LoggerManager* getInstance() {
+        static LoggerManager instance;
+        return &instance;
+    }
 
     LoggerManager(const LoggerManager &) = delete;
     LoggerManager &operator=(const LoggerManager &) = delete;
-    LoggerManager(LoggerManager &&) = delete;
-    LoggerManager &operator=(LoggerManager &&) = delete;
+
 
     void setLogger(std::unique_ptr<ILogger> logger);
     ILogger *getLogger();
@@ -127,31 +129,31 @@ private:
 
 // 日志宏定义（不变）
 #define LOG_TRACE(message) \
-    LoggerManager::getInstance().getLogger()->trace(message)
+    LoggerManager::getInstance()->getLogger()->trace(message)
 
 // ... 其他宏定义（DEBUG/INFO/WARNING/ERROR/FATAL 及 FMT 版本）
 #define LOG_DEBUG(message) \
-    LoggerManager::getInstance().getLogger()->debug(message)
+    LoggerManager::getInstance()->getLogger()->debug(message)
 #define LOG_INFO(message) \
-    LoggerManager::getInstance().getLogger()->info(message)
+    LoggerManager::getInstance()->getLogger()->info(message)
 #define LOG_WARNING(message) \
-    LoggerManager::getInstance().getLogger()->warning(message)
+    LoggerManager::getInstance()->getLogger()->warning(message)
 #define LOG_ERROR(message) \
-    LoggerManager::getInstance().getLogger()->error(message)
+    LoggerManager::getInstance()->getLogger()->error(message)
 #define LOG_FATAL(message) \
-    LoggerManager::getInstance().getLogger()->fatal(message)
+    LoggerManager::getInstance()->getLogger()->fatal(message)
 
 #define LOG_TRACE_FMT(format, ...) \
-    LoggerManager::getInstance().getLogger()->trace(format, __VA_ARGS__)
+    LoggerManager::getInstance()->getLogger()->trace(format, __VA_ARGS__)
 
 #define LOG_DEBUG_FMT(format, ...) \
-    LoggerManager::getInstance().getLogger()->debug(format, __VA_ARGS__)
+    LoggerManager::getInstance()->getLogger()->debug(format, __VA_ARGS__)
 
 #define LOG_INFO_FMT(format, ...) \
-    LoggerManager::getInstance().getLogger()->info(format, __VA_ARGS__)
+    LoggerManager::getInstance()->getLogger()->info(format, __VA_ARGS__)
 #define LOG_WARNING_FMT(format, ...) \
-    LoggerManager::getInstance().getLogger()->warning(format, __VA_ARGS__)
+    LoggerManager::getInstance()->getLogger()->warning(format, __VA_ARGS__)
 #define LOG_ERROR_FMT(format, ...) \
-    LoggerManager::getInstance().getLogger()->error(format, __VA_ARGS__)
+    LoggerManager::getInstance()->getLogger()->error(format, __VA_ARGS__)
 #define LOG_FATAL_FMT(format, ...) \
-    LoggerManager::getInstance().getLogger()->fatal(format, __VA_ARGS__)
+    LoggerManager::getInstance()->getLogger()->fatal(format, __VA_ARGS__)

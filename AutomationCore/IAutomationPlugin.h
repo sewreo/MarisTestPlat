@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <map>
 
 // 前向声明
 struct StepParam;
@@ -14,6 +15,7 @@ struct StepParam {
     std::string action;       // 动作名称(如: click, input, check)
     std::string target;       // 目标控件标识(如: 窗口标题, 控件ID)
     std::string value;        // 操作值(如: 输入文本, 等待时间)
+    std::map<std::string, std::string> params;
     int timeout = 3000;       // 超时时间(毫秒)
 };
 
@@ -25,6 +27,17 @@ struct StepResult {
     std::string message;      // 结果消息
     int error_code = 0;       // 错误代码(0表示无错误)
     std::string extra_data;   // 额外数据(如: 获取的控件文本)
+    std::string err_info;
+    std::string action;
+    long long ExecutionTimeMs;
+};
+
+
+
+enum class TestStatus
+{
+    FAILED = 0,
+    PASS = 1
 };
 
 /**

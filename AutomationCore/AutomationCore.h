@@ -11,6 +11,7 @@
 #include "TestEngine.h"
 #include "Logger.h"
 #include "ReportGenerator.h"
+#include "CoreExport.h"
 
 // 前向声明
 struct TestCase;
@@ -188,11 +189,6 @@ private:
     bool m_initialized; // 初始化状态标志
 };
 
-#ifdef AUTOMATIONCORE_EXPORTS
-#define AUTOMATIONCORE_API __declspec(dllexport)
-#else
-#define AUTOMATIONCORE_API __declspec(dllimport)
-#endif
 
 // C风格接口，供外部模块（如Qt UI）调用
 extern "C" AUTOMATIONCORE_API AutomationCore *createAutomationCore();
